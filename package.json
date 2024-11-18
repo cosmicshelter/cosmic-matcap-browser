@@ -1,0 +1,25 @@
+{
+  "name": "cosmic-texture-browser",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run check-env-variables && concurrently --kill-others \"pnpm run texture-browser\" \"vite --host\"",
+    "build": "vite build",
+    "preview": "vite preview",
+    "texture-browser": "node texture-browser-server.js",
+    "check-env-variables": "node check-env-variables.js"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "node-fetch": "^3.3.2",
+    "three": "^0.170.0",
+    "tweakpane": "^4.0.5",
+    "tweakpane-plugin-preview-select": "^1.0.6"
+  }
+}
