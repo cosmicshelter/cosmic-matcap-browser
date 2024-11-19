@@ -16,28 +16,26 @@ The **Cosmic Texture Browser** is an utility class for browsing and previewing m
 ### Prerequisites
 Ensure you have the following installed:
 
-three.js for 3D rendering.
-Tweakpane for settings.
+`three.js` for 3D rendering.
+`Tweakpane` for settings.
 
-#### 1. Add the CosmicTextureBrowser folder to your project
-#### 2. Install necessary dependencies:
+### 1. Add the `CosmicTextureBrowser` folder to your project
+### 2. Install necessary dependencies:
 ```bash
     pnpm add -D cors dotenv express node-fetch concurrently
 ```
-#### 3. Update your package.json dev command:
+### 3. Update your package.json dev command:
 ```bash
     "dev": "npm run texture-browser \"vite --host\"",
     "texture-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
 ```
-
-#### 4. Import and use the tool in your code:
+### 4. Import and use the tool in your code:
 ```js
 import CosmicTextureBrowser from './CosmicTextureBrowser';
 
 const material = new THREE.MeshMatcapMaterial();
 CosmicTextureBrowser.initFolder(material, 'matcap');
 ```
----
 
 ## How to Use
 
@@ -55,40 +53,19 @@ If you need to change the save path, modify the configuration in CosmicTextureBr
 ```
 For example:
 
-publicFolderName: The base folder for serving static assets.
-targetFolder: Where textures will be downloaded.
+- publicFolderName: The base folder for serving static assets.
+- targetFolder: Where textures will be downloaded.
 
 ### Filename
 
-- **Filename Customization**:
-By default, filenames are auto-generated using Date.now(). For custom filenames:
+By default, filenames are auto-generated using `Date.now()`. 
 
-Enter a name in the Filename Input field in Tweakpane.
-The filename will be used when saving textures.
+For custom filenames:
+- Enter a name in the Filename Input field in Tweakpane.
+- The filename will be used when saving textures.
 
----
 
 # Advanced Usage
-
-## Change Texture Source
-
-The browser fetches matcaps from the default URL:
-
-[http://matcaps-browser.cosmicshelter.com/](http://matcaps-browser.cosmicshelter.com/)
-
-To host textures on your own server:
-1. Upload textures and folders to your server.
-2. Update the `browserUrl` in `config.js`:
-
-```js
-   export default {
-       matcap: {
-           type: 'matcap',
-           browserUrl: 'http://your-url.com/',
-           uniform: '',
-       },
-   };
-```
 
 ## Material Previews
 
@@ -124,6 +101,26 @@ Once the uniform is set in `config.js`, you can initialize the browser without s
 ```js
 const material = new THREE.MeshMatcapMaterial();
 CosmicTextureBrowser.initFolder(material, 'matcap');
+```
+
+## Change Texture Source
+
+The browser fetches matcaps from the default URL:
+
+[http://matcaps-browser.cosmicshelter.com/](http://matcaps-browser.cosmicshelter.com/)
+
+To host textures on your own server:
+1. Upload textures and folders to your server.
+2. Update the `browserUrl` in `config.js`:
+
+```js
+   export default {
+       matcap: {
+           type: 'matcap',
+           browserUrl: 'http://your-url.com/',
+           uniform: '',
+       },
+   };
 ```
 
 ## Texture Types
@@ -166,7 +163,7 @@ const material = new THREE.MeshStandardMaterial();
 CosmicTextureBrowser.initFolder(material, 'normal'); // Loads normal maps
 CosmicTextureBrowser.initFolder(material, 'roughness'); // Loads roughness maps
 ```
----
+
 # Development
 
 ### 1. Clone the Repository
