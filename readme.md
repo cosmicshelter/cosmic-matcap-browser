@@ -4,6 +4,8 @@ This tool is a texture browser for matcaps with direct preview on materials.
 600 matcaps sorted by colors in 15 folders, and each folder is sorted by color intensity.
 All the matcaps are resized in 512x512 and webp format.
 
+![](https://github.com/cosmicshelter/cosmic-texture-browser/blob/main/public/preview.gif)
+
 ### Start project
 
 ```bash
