@@ -1,8 +1,7 @@
-import './style.css'
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
 
-import CosmicTextureBrowser from './CosmicTextureBrowser';
+import CosmicTextureBrowser from '../CosmicTextureBrowser';
 
 let scene, renderer, camera;
 let geometry, material, mesh;
@@ -28,7 +27,7 @@ function setupScene() {
 
 function setupGeometry() {
   geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
-  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('512/ultra-realistic/02.webp') });
+  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/512/ultra-realistic/02.webp') });
   mesh = new THREE.Mesh(geometry, material);
   
   scene.add(mesh);
