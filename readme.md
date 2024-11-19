@@ -1,10 +1,8 @@
 # Cosmic Texture Browser
 
-The **Cosmic Texture Browser** is a utility class for browsing and previewing matcap textures directly on materials in real-time. It comes with **600 matcaps** categorized by color and intensity, all resized to 512x512 in WebP format.
+The **Cosmic Texture Browser** is an utility class for browsing and previewing matcap textures directly on materials in real-time. It comes with **600 matcaps** categorized by color and intensity, all resized to 512x512 in WebP format.
 
 ![Preview](https://github.com/cosmicshelter/cosmic-texture-browser/blob/main/public/preview.gif)
-
----
 
 ## Features
 
@@ -13,44 +11,13 @@ The **Cosmic Texture Browser** is a utility class for browsing and previewing ma
 - **Material Previews**: Easily preview textures directly on materials.
 - **Customizable**: Configure texture paths, filenames, and material properties.
 
----
-
 ## Quick Setup
-
-Follow these steps to quickly get started with the **Cosmic Texture Browser**:
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/cosmicshelter/cosmic-texture-browser.git
-cd cosmic-texture-browser
-```
-
-### 2. Install dependencies
-
-```bash
-pnpm i
-```
-
-### 3. Start the development server
-
-```bash
-pnpm run dev
-```
-### 3. Open in browser
-
-Visit [http://localhost:3000]
-
-
-You're all set! For advanced usage or integrating the browser into your project, check the Usage and Extended Usage sections.
-
-## Integrating the Browser in Your Project
 
 ### Prerequisites
 Ensure you have the following installed:
 
-THREE.js for 3D rendering.
-Tweakpane for UI controls.
+three.js for 3D rendering.
+Tweakpane for settings.
 
 #### 1. Add the CosmicTextureBrowser folder to your project
 #### 2. Install necessary dependencies:
@@ -64,7 +31,6 @@ Tweakpane for UI controls.
 ```
 
 #### 4. Import and use the tool in your code:
-
 ```js
 import CosmicTextureBrowser from './CosmicTextureBrowser';
 
@@ -78,7 +44,7 @@ CosmicTextureBrowser.initFolder(material, 'matcap');
 ### Save texture
 
 To download a texture, click the Save Texture button. The default path for saved textures is:
-public/textures/matcap/matcap-183842924.webp.
+public/textures/matcap/matcap-183842924.webp. (timestamp)
 
 If you need to change the save path, modify the configuration in CosmicTextureBrowser/server/config.js:
 ```js
@@ -126,7 +92,7 @@ To host textures on your own server:
 
 ## Material Previews
 
-The default demo uses `MeshMatcapMaterial` from THREE.js to preview textures. If you need to apply textures to a custom material, you can do so in the following ways:
+The default demo uses `MeshMatcapMaterial` from three.js to preview textures. If you need to apply textures to a custom material, you can do so in the following ways:
 
 ### Specifying Uniforms Directly
 
@@ -200,3 +166,29 @@ const material = new THREE.MeshStandardMaterial();
 CosmicTextureBrowser.initFolder(material, 'normal'); // Loads normal maps
 CosmicTextureBrowser.initFolder(material, 'roughness'); // Loads roughness maps
 ```
+---
+# Development
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/cosmicshelter/cosmic-texture-browser.git
+cd cosmic-texture-browser
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm i
+```
+
+### 3. Start the development server
+
+```bash
+pnpm run dev
+```
+### 3. Open in browser
+
+Visit [http://localhost:3000]
+
+---
