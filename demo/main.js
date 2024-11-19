@@ -27,7 +27,7 @@ function setupScene() {
 
 function setupGeometry() {
   geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
-  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/512/ultra-realistic/02.webp') });
+  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/512/png/ultra-realistic/02.png') });
   mesh = new THREE.Mesh(geometry, material);
   
   scene.add(mesh);
@@ -57,6 +57,6 @@ function resize() {
 window.addEventListener('resize', resize);
 animate();
 
-CosmicTextureBrowser.initFolder(material, 'matcap');
+CosmicTextureBrowser.initFolder(material, {name: 'matcap'});
 // you can also specify the uniform name if it's different from the default
-// CosmicTextureBrowser.initFolder(material, 'matcap', 'uMatcapMap');
+// CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniformName: 'uMatcapMap'});

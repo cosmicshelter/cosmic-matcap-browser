@@ -1,7 +1,8 @@
 import { Pane } from 'tweakpane';
 import { RepeatWrapping, TextureLoader } from 'three';
-import config from './config';
 import * as TweakpanePluginPreviewSelect from 'tweakpane-plugin-preview-select';
+
+import config from './config';
 
 const IP = 'localhost';
 const PORT = 9991;
@@ -9,7 +10,7 @@ const PORT = 9991;
 /**
  * Utility functions for fetching and parsing
  */
-const fetchHTML = async (url, runtimeConfig) => {
+const fetchHTML = async (url) => {
     const proxyUrl = `http://${IP}:${PORT}/proxy?url=${encodeURIComponent(url)}`;
     const response = await fetch(proxyUrl);
     if (!response.ok) {
@@ -40,30 +41,23 @@ class CosmicTextureBrowser {
     }
 
     /**
-     * Initialize the browser with the production flag.
-     * @param {boolean} isProduction - If true, disables the texture browser.
-     */
-    init(isProduction) {
-        this._isProduction = isProduction;
-    }
-
-    /**
      * Initialize a Tweakpane folder for a material and texture type.
      * @param {object} material - Three.js material object.
-     * @param {string} textureType - Type of texture.
-     * @param {string} uniform - Uniform name for shaders.
+     * @param {object} options - Options for the texture browser.
+     * @param {string} options.type - Texture type.
+     * @param {string} options.uniform - Uniform name for the texture.
      */
-    async initFolder(material, textureType, uniform) {
-        if (this._isProduction) return;
+    async initFolder(material, options = {}) {
+        const textureType = options.type || 'matcap';
 
         if (!config[textureType]) {
             console.error(`Invalid textureType: ${textureType}`);
             return;
         }
 
-        this._activeConfig = { ...config[textureType], uniform };
+        this._activeConfig = { ...config[textureType], uniform: options.uniform };
 
-        this._disposePane();
+        this.dispose();
 
         this._activePane = new Pane();
         this._activePane.registerPlugin(TweakpanePluginPreviewSelect);
@@ -79,7 +73,7 @@ class CosmicTextureBrowser {
     /**
      * Dispose of the current pane.
      */
-    _disposePane() {
+    dispose() {
         if (this._activePane) {
             this._activePane.dispose();
             this._activePane = null;
@@ -110,7 +104,7 @@ class CosmicTextureBrowser {
     async _downloadImage(material, textureType) {
         const { image } = material[config[textureType].type] || {};
         if (!image) {
-            console.error('No image found on the material.');
+            console.error('CosmicTextureBrowser: No image found on the material.');
             return;
         }
 
@@ -129,12 +123,12 @@ class CosmicTextureBrowser {
 
             const data = await response.json();
             if (data.success) {
-                console.log('Image saved successfully!');
+                console.log('CosmicTextureBrowser: Image saved successfully!');
             } else {
-                console.error('Error saving image:', data.error);
+                console.error('CosmicTextureBrowser: Error saving image:', data.error);
             }
         } catch (error) {
-            console.error('Error downloading image:', error);
+            console.error('CosmicTextureBrowser: Error downloading image:', error);
         }
     }
 
@@ -166,7 +160,7 @@ class CosmicTextureBrowser {
                 }
             }
         } catch (error) {
-            console.error('Error fetching folders:', error);
+            console.error('CosmicTextureBrowser: Error fetching folders:', error);
         }
     }
 
@@ -183,7 +177,7 @@ class CosmicTextureBrowser {
             const textureFiles = parseTextureFiles(html);
 
             if (!textureFiles.length) {
-                console.log('No textures found in', folderName);
+                console.log('CosmicTextureBrowser: No textures found in', folderName);
                 return;
             }
             
@@ -197,13 +191,13 @@ class CosmicTextureBrowser {
                     previewBaseUrl: `${this._activeConfig.browserUrl}${folderName}/`,
                     showPreview: true,
                     objectFit: 'cover',
-                    height: 50,
+                    height: 150,
                 }
             ).on('change', (ev) => {
                 this._loadTexture(ev.value, folderName, material);
             });
         } catch (error) {
-            console.error('Error fetching textures:', error);
+            console.error('CosmicTextureBrowser: Error fetching textures:', error);
         }
     }
 

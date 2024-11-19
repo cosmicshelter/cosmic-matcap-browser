@@ -20,10 +20,13 @@ app.use(cors({ origin: '*' }));
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+    
 const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, 'utf8'));
 const projectRoot = findProjectRoot();
-const vitePublicPath = path.join(projectRoot, config.publicFolderName); 
+
+const vitePublicPath = config.publicFolderName 
+    ? path.join(projectRoot, config.publicFolderName) 
+    : path.join(projectRoot, '..');
 
 app.get('/proxy', async(req, res) => {
     const { url } = req.query;
@@ -31,7 +34,6 @@ app.get('/proxy', async(req, res) => {
     if (!url) {
         return res.status(400).send('Image URL is required');
     }
-
     try {
         const response = await fetch(url);
 
@@ -81,7 +83,7 @@ async function downloadTexture(req, res, type) {
             buffer = Buffer.from(arrayBuffer);
         }
 
-        const filePath = path.join(folderPath, `${fileName}.webp`);
+        const filePath = path.join(folderPath, `${fileName}.png`);
         fs.writeFileSync(filePath, buffer);
 
         console.log(`Image saved to ${filePath}`);
@@ -100,7 +102,7 @@ app.listen(PORT, () => {
 
 function findProjectRoot() {
     let dir = __dirname;
-
+    
     while (dir !== path.parse(dir).root) {
         if (fs.existsSync(path.join(dir, config.publicFolderName))) {
             return dir;
