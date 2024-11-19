@@ -224,8 +224,6 @@ class CosmicTextureBrowser {
             } else {
                 material[this._activeConfig.type] = texture;
             }
-
-            console.log(`Loaded texture: ${selectedTexture}`);
         });
     }
 }
