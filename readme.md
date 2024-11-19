@@ -38,8 +38,6 @@ The default demo uses `MeshMatcapMaterial` from three.js to preview matcaps. If 
 
 ### Defining a uniform
 
-When initializing the browser, provide the material's texture uniform as an argument:
-
 ```js
 const material = new THREE.ShaderMaterial({
     uniforms: {
@@ -49,7 +47,7 @@ const material = new THREE.ShaderMaterial({
 CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniformName: 'uMatcapMap'});
 ```
 
-### Defining uniforms in `config.js`
+### Defining uniform in `config.js`
 
 You can also configure the uniform name directly in the `config.js` file. This approach is helpful if you want to reuse the browser across multiple materials without passing the uniform each time.
 
@@ -181,3 +179,11 @@ pnpm dev
 ### 3. Open in browser
 
 Visit http://localhost:3000
+
+
+# Credits
+https://observablehq.com/@makio135/matcaps?ui=classic
+https://finestudio.gumroad.com/l/aura?layout=profile&recommended_by=library
+https://jvliette.gumroad.com/l/matcaps?layout=profile&recommended_by=library
+https://petrosfera.gumroad.com/l/abstractmatcapsvol1
+https://kemono.su/gumroad/user/6643846471246/post/neanp
