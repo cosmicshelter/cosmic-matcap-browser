@@ -65,8 +65,6 @@ For example:
 publicFolderName: The base folder for serving static assets.
 targetFolder: Where textures will be downloaded.
 
----
-
 ### Filename
 
 - **Filename Customization**:
@@ -75,10 +73,9 @@ By default, filenames are auto-generated using Date.now(). For custom filenames:
 Enter a name in the Filename Input field in Tweakpane.
 The filename will be used when saving textures.
 
-
+---
 
 ## Integrating the Browser in Your Project
-
 
 ### Prerequisites
 Ensure you have the following installed:
@@ -86,27 +83,24 @@ Ensure you have the following installed:
 THREE.js for 3D rendering.
 Tweakpane for UI controls.
 
-### 1. Add the CosmicTextureBrowser folder to your project
-### 2. Install necessary dependencies:
+#### 1. Add the CosmicTextureBrowser folder to your project
+#### 2. Install necessary dependencies:
 ```bash
     pnpm add -D cors dotenv express node-fetch concurrently
 ```
-### 3. Install necessary dependencies:
-
-Update your package.json dev command:
+#### 3. Update your package.json dev command:
 ```bash
     "dev": "npm run run-browser \"vite --host\"",
     "run-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
 ```
 
-### 4. Import and use the tool in your code:
+#### 4. Import and use the tool in your code:
 
 ```js
 import CosmicTextureBrowser from './CosmicTextureBrowser';
 
 const material = new THREE.MeshMatcapMaterial();
-const texType = 'matcap';
-CosmicTextureBrowser.initFolder(material, texType);
+CosmicTextureBrowser.initFolder(material, 'matcap');
 ```
 
 # Advanced Usage
@@ -143,8 +137,7 @@ When initializing the browser, provide the material's texture uniform as an argu
 ```js
 const material = new THREE.MeshStandardMaterial();
 const uniform = 'uMatcapMap'; // The uniform name for your material's matcap texture
-const texType = 'matcap'; // The texture type to use
-CosmicTextureBrowser.initFolder(material, texType, uniform);
+CosmicTextureBrowser.initFolder(material, 'matcap', uniform);
 ```
 
 ### Defining Uniforms in `config.js`
