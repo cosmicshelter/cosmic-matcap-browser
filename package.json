@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run runBrowser \"vite --host\"",
-    "runBrowser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\"",
+    "dev": "npm run run-browser \"vite --host\"",
+    "run-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\"",
     "build": "vite build",
     "preview": "vite preview"
   },

@@ -146,13 +146,19 @@ class CosmicTextureBrowser {
                 `${this._activeConfig.browserUrl}/`,
                 this._runtimeConfig
             );
-
+    
+            // Parse all anchor links
             const links = parseLinks(html, 'a');
-
+    
             for (const link of links) {
-                const folderName = link.getAttribute('href');
-                if (folderName && folderName !== 'index.php') {
+                const href = link.getAttribute('href');
+    
+                // Skip query parameters or invalid links
+                if (href && !href.startsWith('?') && !href.includes(';') && !href.includes('.')) {
+                    const folderName = href.endsWith('/') ? href.slice(0, -1) : href; // Remove trailing slash if any
                     const textureFolder = folder.addFolder({ title: folderName, expanded: false });
+    
+                    // Fetch textures in the folder
                     await this._fetchTextures(textureFolder, folderName, material);
                 }
             }

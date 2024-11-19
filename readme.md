@@ -29,7 +29,7 @@ cd cosmic-texture-browser
 ### 2. Install dependencies
 
 ```bash
-pnpm add
+pnpm i
 ```
 
 ### 3. Start the development server
@@ -114,7 +114,7 @@ To host textures on your own server:
 1. Upload textures and folders to your server.
 2. Update the `browserUrl` in `config.js`:
 
-   ```js
+```js
    export default {
        matcap: {
            type: 'matcap',
@@ -122,8 +122,7 @@ To host textures on your own server:
            uniform: '',
        },
    };
-3. Optionally, use the provided index.php file to list server folders automatically.
-
+```
 
 ## Material Previews
 
