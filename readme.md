@@ -19,17 +19,12 @@ Ensure you have the following installed:
 `three.js` for 3D rendering.
 `Tweakpane` for settings.
 
-### 1. Add the `CosmicTextureBrowser` folder to your project
-### 2. Install necessary dependencies:
+### 1. Add the `CosmicTextureBrowser` folder to your project.
+### 2. Run the setup file (install dependencies + node commands):
 ```bash
-    pnpm add -D cors dotenv express node-fetch concurrently
+    node CosmicTextureBrowser/server/setup.js
 ```
-### 3. Update your package.json dev command:
-```bash
-    "dev": "npm run texture-browser \"vite --host\"",
-    "texture-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
-```
-### 4. Import and use the tool in your code:
+### 3. Import and use the tool in your code:
 ```js
 import CosmicTextureBrowser from './CosmicTextureBrowser';
 
