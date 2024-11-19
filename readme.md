@@ -22,7 +22,7 @@ Ensure you have the following installed:
 ### 1. Add the `CosmicTextureBrowser` folder to your project.
 ### 2. Run the setup file (install dependencies + node commands):
 ```bash
-node CosmicTextureBrowser/server/setup.js
+node path/to/your/folder/CosmicTextureBrowser/server/setup.js
 ```
 ### 3. Import and use the tool in your code:
 ```js
