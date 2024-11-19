@@ -8,8 +8,8 @@ import fetch from 'node-fetch';
 
 dotenv.config();
 
-const IP = process.env.VITE_DEV_SERVER_IP;
-const PORT = process.env.VITE_TEXTURE_BROWSER_SERVER_PORT;
+const IP = 'localhost';
+const PORT = 9991;
 
 const app = express();
 

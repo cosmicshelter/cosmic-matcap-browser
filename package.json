@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "concurrently --kill-others \"vite --host\" \"npm run texture-browser\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "texture-browser": "node CosmicTextureBrowser/server/texture-browser-server.js"
   },
   "devDependencies": {
     "cors": "^2.8.5",

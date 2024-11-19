@@ -172,12 +172,13 @@ cd cosmic-texture-browser
 
 ```bash
 pnpm i
+node CosmicTextureBrowser/server/setup.js
 ```
 
 ### 3. Start the development server
 
 ```bash
-pnpm run dev
+pnpm dev
 ```
 ### 3. Open in browser
 

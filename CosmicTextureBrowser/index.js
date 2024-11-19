@@ -3,11 +3,14 @@ import { RepeatWrapping, TextureLoader } from 'three';
 import config from './config';
 import * as TweakpanePluginPreviewSelect from 'tweakpane-plugin-preview-select';
 
+const IP = 'localhost';
+const PORT = 9991;
+
 /**
  * Utility functions for fetching and parsing
  */
 const fetchHTML = async (url, runtimeConfig) => {
-    const proxyUrl = `http://${runtimeConfig.VITE_DEV_SERVER_IP}:${runtimeConfig.VITE_TEXTURE_BROWSER_SERVER_PORT}/proxy?url=${encodeURIComponent(url)}`;
+    const proxyUrl = `http://${IP}:${PORT}/proxy?url=${encodeURIComponent(url)}`;
     const response = await fetch(proxyUrl);
     if (!response.ok) {
         throw new Error(`Failed to fetch HTML from ${url}`);
@@ -116,7 +119,7 @@ class CosmicTextureBrowser {
 
         try {
             const response = await fetch(
-                `http://${this._runtimeConfig.VITE_DEV_SERVER_IP}:${this._runtimeConfig.VITE_TEXTURE_BROWSER_SERVER_PORT}/download-texture/`,
+                `http://${IP}:${PORT}/download-texture/`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -213,7 +216,7 @@ class CosmicTextureBrowser {
     _loadTexture(selectedTexture, folderName, material) {
         const textureLoader = new TextureLoader();
         const url = `${this._activeConfig.browserUrl}${folderName}/${selectedTexture}`;
-        const proxiedTextureUrl = `http://${this._runtimeConfig.VITE_DEV_SERVER_IP}:${this._runtimeConfig.VITE_TEXTURE_BROWSER_SERVER_PORT}/proxy?url=${encodeURIComponent(url)}`;
+        const proxiedTextureUrl = `http://${IP}:${PORT}/proxy?url=${encodeURIComponent(url)}`;
         textureLoader.load(proxiedTextureUrl, (texture) => {
             texture.wrapS = RepeatWrapping;
             texture.wrapT = RepeatWrapping;
