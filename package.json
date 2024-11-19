@@ -1,7 +1,7 @@
 {
   "name": "cosmic-texture-browser",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "npm run runBrowser \"vite --host\"",
@@ -10,13 +10,14 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^5.4.11"
-  },
-  "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "node-fetch": "^3.3.2",
+    "vite": "^5.4.11",
+    "concurrently": "^9.1.0"
+  },
+  "dependencies": {
     "three": "^0.170.0",
     "tweakpane": "^4.0.5",
     "tweakpane-plugin-preview-select": "^1.0.6"

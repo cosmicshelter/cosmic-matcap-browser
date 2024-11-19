@@ -9,7 +9,7 @@ All the matcaps are resized in 512x512 and webp format.
 ### Start project
 
 ```bash
-pnpm i
+pnpm add
 pnpm run dev
 ```
 
@@ -41,7 +41,7 @@ You'll need to have THREE and Tweakpane already installed.
 
 Import the CosmicTextureBrowser folder into your project and install these packages
 ```bash
-    pnpm i cors dotenv express node-fetch tweakpane-plugin-preview-select concurrently
+    pnpm add -D cors dotenv express node-fetch concurrently
 ```
 
 The textures are fetched with express (to avoid cors, and to be able to download the texture directly in your project), so add this to your dev command in package.json
