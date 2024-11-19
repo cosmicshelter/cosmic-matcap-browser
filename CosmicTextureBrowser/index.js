@@ -38,6 +38,10 @@ class CosmicTextureBrowser {
         this._runtimeConfig = runtimeConfig;
         this._activePane = null;
         this._textureName = { value: '' };
+
+        this._server = {
+            state: 'disconnected',
+        };
     }
 
     /**
@@ -66,6 +70,8 @@ class CosmicTextureBrowser {
             title: `${this._title} - ${textureType}`,
         });
 
+        this._checkDebuggerServer();
+        
         this._createButtons(folder, material, textureType);
         await this._fetchFolders(folder, material);
     }
@@ -87,13 +93,44 @@ class CosmicTextureBrowser {
      * @param {string} textureType - Texture type.
      */
     _createButtons(folder, material, textureType) {
+        folder.addBinding(this._server, 'state', { readonly: true, label: 'State', interval: 100, index: 1 });
+
         folder.addButton({ title: '📁 Save Texture' }).on('click', () =>
             this._downloadImage(material, textureType)
         );
-
         folder.addBlade({ view: 'separator' });
 
         folder.addBinding(this._textureName, 'value', { label: 'Filename' });
+    }
+
+    /**
+     * Check if the debugger server is running.
+     * If not, the texture browser will not work.
+     * This is only checked in production mode.
+     * The server state is updated every 5 seconds.
+     * The server state can be 'connected' or 'disconnected'.
+    */
+    _checkDebuggerServer() {
+        if (process.env.NODE_ENV === 'production') {
+            this._server.state = 'disconnected';
+            return;
+        }
+
+        const interval = 5000;
+
+        // Initial check
+        fetch(`http://${IP}:${PORT}/check/`, { method: 'GET' }).then((res) => {
+            this._server.state = res.ok ? 'connected' : 'disconnected';
+        });
+
+        // Check interval
+        this._checkDebuggerServerInterval = setInterval(() => {
+            fetch(`http://${IP}:${PORT}/check/`, { method: 'GET' }).then((res) => {
+                this._server.state = res.ok ? 'connected' : 'disconnected';
+            }, () => {
+                this._server.state = 'disconnected';
+            });
+        }, interval);
     }
 
     /**
@@ -108,9 +145,11 @@ class CosmicTextureBrowser {
             return;
         }
 
+        if(this._serverState === 'disconnected') return;
+        
         const imageSrc = image.src;
         const name = this._textureName.value || `${textureType}-${Date.now()}`;
-
+        
         try {
             const response = await fetch(
                 `http://${IP}:${PORT}/download-texture/`,

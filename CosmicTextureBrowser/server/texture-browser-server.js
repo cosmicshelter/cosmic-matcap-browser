@@ -99,6 +99,9 @@ app.listen(PORT, () => {
     console.log(`\n🟢 Texture Browser server running on http://${IP}:${PORT}\n`);
 });
 
+app.get('/check', (req, res) => {
+    res.send('check');
+});
 
 function findProjectRoot() {
     let dir = __dirname;
