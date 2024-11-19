@@ -59,8 +59,8 @@ Tweakpane for UI controls.
 ```
 #### 3. Update your package.json dev command:
 ```bash
-    "dev": "npm run run-browser \"vite --host\"",
-    "run-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
+    "dev": "npm run texture-browser \"vite --host\"",
+    "texture-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
 ```
 
 #### 4. Import and use the tool in your code:
