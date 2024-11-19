@@ -17,8 +17,13 @@ app.use(express.json({ limit: '5000mb' })); // Adjust as needed
 app.use(express.urlencoded({ limit: '5000mb', extended: true }));
 app.use(cors({ origin: '*' }));
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const config = JSON.parse(fs.readFileSync(`${__dirname}/config.json`, 'utf8'));
+const projectRoot = findProjectRoot();
+const vitePublicPath = path.join(projectRoot, config.publicFolderName); 
 
 app.get('/proxy', async(req, res) => {
     const { url } = req.query;
@@ -50,7 +55,7 @@ app.post('/download-texture', (req, res) => {
 });
 
 async function downloadTexture(req, res, type) {
-    const targetFolder = req.body.targetFolder;
+    const textureType = req.body.textureType;
     const fileName = req.body.fileName;
 
     const { imageUrl } = req.body;
@@ -60,7 +65,7 @@ async function downloadTexture(req, res, type) {
     }
 
     try {
-        const folderPath = path.join(__dirname, 'public', 'webgl', 'textures', targetFolder);
+        const folderPath = path.join(vitePublicPath, config.targetFolder, textureType);
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, { recursive: true });
         }
@@ -76,7 +81,7 @@ async function downloadTexture(req, res, type) {
             buffer = Buffer.from(arrayBuffer);
         }
 
-        const filePath = path.join(folderPath, `${fileName}.jpg`);
+        const filePath = path.join(folderPath, `${fileName}.webp`);
         fs.writeFileSync(filePath, buffer);
 
         console.log(`Image saved to ${filePath}`);
@@ -91,3 +96,17 @@ async function downloadTexture(req, res, type) {
 app.listen(PORT, () => {
     console.log(`\n🟢 Texture Browser server running on http://${IP}:${PORT}\n`);
 });
+
+
+function findProjectRoot() {
+    let dir = __dirname;
+
+    while (dir !== path.parse(dir).root) {
+        if (fs.existsSync(path.join(dir, config.publicFolderName))) {
+            return dir;
+        }
+        dir = path.dirname(dir);
+    }
+
+    throw new Error('Could not find project root');
+}

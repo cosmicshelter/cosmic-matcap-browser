@@ -1,7 +1,8 @@
 import './style.css'
 import * as THREE from 'three';
-import CosmicTextureBrowser from './utils/CosmicTextureBrowser';
 import { OrbitControls } from 'three/examples/jsm/Addons.js';
+
+import CosmicTextureBrowser from './CosmicTextureBrowser';
 
 let scene, renderer, camera;
 let geometry, material, mesh;
@@ -27,7 +28,7 @@ function setupScene() {
 
 function setupGeometry() {
   geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
-  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('https://makio135.com/matcaps/64/6BBD6B_C8F3C8_A3E2A3_B4ECB4-64px.png') });
+  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('512/ultra-realistic/02.webp') });
   mesh = new THREE.Mesh(geometry, material);
   
   scene.add(mesh);
@@ -57,4 +58,6 @@ function resize() {
 window.addEventListener('resize', resize);
 animate();
 
-CosmicTextureBrowser.initFolder(material, 'matcap', renderer);
+CosmicTextureBrowser.initFolder(material, 'matcap');
+// you can also specify the uniform name if it's different from the default
+// CosmicTextureBrowser.initFolder(material, 'matcap', 'uMatcapMap');

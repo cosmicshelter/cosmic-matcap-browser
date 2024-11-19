@@ -4,11 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run check-env-variables && concurrently --kill-others \"pnpm run texture-browser\" \"vite --host\"",
+    "dev": "npm run runBrowser \"vite --host\"",
+    "runBrowser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\"",
     "build": "vite build",
-    "preview": "vite preview",
-    "texture-browser": "node texture-browser-server.js",
-    "check-env-variables": "node check-env-variables.js"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "vite": "^5.4.11"
