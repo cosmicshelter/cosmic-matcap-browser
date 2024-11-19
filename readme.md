@@ -44,6 +44,33 @@ Visit [http://localhost:3000]
 
 You're all set! For advanced usage or integrating the browser into your project, check the Usage and Extended Usage sections.
 
+## Integrating the Browser in Your Project
+
+### Prerequisites
+Ensure you have the following installed:
+
+THREE.js for 3D rendering.
+Tweakpane for UI controls.
+
+#### 1. Add the CosmicTextureBrowser folder to your project
+#### 2. Install necessary dependencies:
+```bash
+    pnpm add -D cors dotenv express node-fetch concurrently
+```
+#### 3. Update your package.json dev command:
+```bash
+    "dev": "npm run run-browser \"vite --host\"",
+    "run-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
+```
+
+#### 4. Import and use the tool in your code:
+
+```js
+import CosmicTextureBrowser from './CosmicTextureBrowser';
+
+const material = new THREE.MeshMatcapMaterial();
+CosmicTextureBrowser.initFolder(material, 'matcap');
+```
 ---
 
 ## How to Use
@@ -74,34 +101,6 @@ Enter a name in the Filename Input field in Tweakpane.
 The filename will be used when saving textures.
 
 ---
-
-## Integrating the Browser in Your Project
-
-### Prerequisites
-Ensure you have the following installed:
-
-THREE.js for 3D rendering.
-Tweakpane for UI controls.
-
-#### 1. Add the CosmicTextureBrowser folder to your project
-#### 2. Install necessary dependencies:
-```bash
-    pnpm add -D cors dotenv express node-fetch concurrently
-```
-#### 3. Update your package.json dev command:
-```bash
-    "dev": "npm run run-browser \"vite --host\"",
-    "run-browser": "node CosmicTextureBrowser/server/check-env-variables.js && concurrently --kill-others \"node CosmicTextureBrowser/server/texture-browser-server.js\""
-```
-
-#### 4. Import and use the tool in your code:
-
-```js
-import CosmicTextureBrowser from './CosmicTextureBrowser';
-
-const material = new THREE.MeshMatcapMaterial();
-CosmicTextureBrowser.initFolder(material, 'matcap');
-```
 
 # Advanced Usage
 
