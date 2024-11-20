@@ -89,7 +89,7 @@ class CosmicTextureBrowser {
         for (const key in files) {
                 const filesArray = [];
                 const typeFolder = folder.addFolder({ title: key, expanded: false });
-                const textureFolderPath = `/512/png/${key}/`;
+                const textureFolderPath = `assets/512/png/${key}/`;
                 
                 if (!files[key]) {
                     console.error('No textures found in the public folder.');
