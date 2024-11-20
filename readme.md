@@ -2,6 +2,8 @@
 
 The **Cosmic Texture Browser** is an utility class for browsing and previewing matcap textures directly on materials in real-time. It comes with **600 matcaps** categorized by color and intensity, all resized to 512x512 in png format.
 
+https://cosmicshelter.github.io/cosmic-texture-browser/demo/
+
 ![Preview](https://github.com/cosmicshelter/cosmic-texture-browser/blob/main/public/preview.gif)
 
 ## Features
