@@ -1,14 +1,14 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
+import { GLTFLoader, OrbitControls } from 'three/examples/jsm/Addons.js';
 
 import CosmicTextureBrowser from '../CosmicTextureBrowser';
 
 let scene, renderer, camera;
-let geometry, material, mesh;
+let material, mesh;
 
 setupRenderer()
 setupScene()
-setupGeometry()
+setupMesh()
 setupLights()
 
 function setupRenderer() {
@@ -22,22 +22,24 @@ function setupScene() {
   
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   camera.controls = new OrbitControls(camera, renderer.domElement);
-  camera.position.z = 5;
+  camera.position.z = 3;
 }
 
-function setupGeometry() {
-  geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
+function setupMesh() {
   material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/512/png/ultra-realistic/02.png') });
-  mesh = new THREE.Mesh(geometry, material);
-  
-  scene.add(mesh);
+  const model = new GLTFLoader().load('/models/model-sample.glb', (gltf) => {
+    scene.add(gltf.scene);
+    mesh = gltf.scene;
+    gltf.scene.traverse((child) => {
+      if (child.isMesh) {
+        child.material = material;
+      }
+    });
+  })
 }
 
 function animate() {
   requestAnimationFrame(animate);
-
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.01;
 
   renderer.render(scene, camera);
 }

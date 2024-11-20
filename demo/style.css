@@ -3,3 +3,9 @@ body {
     height: 100%;
     margin: 0;
 }
+.logo{
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%) scale(2.25);
+}
