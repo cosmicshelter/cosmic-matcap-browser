@@ -26,8 +26,8 @@ function setupScene() {
 }
 
 function setupMesh() {
-  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('demo/assets/512/png/ultra-realistic/02.png') });
-  const model = new GLTFLoader().load('demo/assets/models/model-sample.glb', (gltf) => {
+  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/assets/512/png/ultra-realistic/02.png') });
+  const model = new GLTFLoader().load('/assets/models/model-sample.glb', (gltf) => {
     scene.add(gltf.scene);
     mesh = gltf.scene;
     gltf.scene.traverse((child) => {
