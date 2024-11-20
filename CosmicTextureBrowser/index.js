@@ -1,5 +1,5 @@
 import { Pane } from 'tweakpane';
-import { RepeatWrapping, TextureLoader } from 'three';
+import { RepeatWrapping, SRGBColorSpace, TextureLoader } from 'three';
 import * as TweakpanePluginPreviewSelect from 'tweakpane-plugin-preview-select';
 
 import config from './config';
@@ -130,7 +130,7 @@ class CosmicTextureBrowser {
         textureLoader.load(texturePath, (texture) => {
             texture.wrapS = RepeatWrapping;
             texture.wrapT = RepeatWrapping;
-
+            texture.colorSpace = SRGBColorSpace;
             const uniform = this._activeConfig.uniform;
             if (uniform) {
                 material.uniforms[uniform].value = texture;
