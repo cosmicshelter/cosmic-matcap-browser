@@ -15,6 +15,7 @@ function setupRenderer() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
+  renderer.domElement.style.position = 'fixed';
 }
 
 function setupScene() {
@@ -26,8 +27,8 @@ function setupScene() {
 }
 
 function setupMesh() {
-  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('/assets/512/png/ultra-realistic/02.png') });
-  const model = new GLTFLoader().load('/assets/models/model-sample.glb', (gltf) => {
+  material = new THREE.MeshMatcapMaterial({ matcap: new THREE.TextureLoader().load('assets/512/png/ultra-realistic/02.png') });
+  const model = new GLTFLoader().load('assets/models/model-sample.glb', (gltf) => {
     scene.add(gltf.scene);
     mesh = gltf.scene;
     gltf.scene.traverse((child) => {
