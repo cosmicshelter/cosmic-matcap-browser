@@ -46,7 +46,7 @@ const material = new THREE.ShaderMaterial({
         uMatcapMap: {value: ''}
     }
 });
-CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniform: 'uMatcapMap'});
+CosmicTextureBrowser.initFolder(material, {type: 'matcap', uniform: 'uMatcapMap'});
 ```
 
 ### Defining uniform in `config.js`
@@ -71,7 +71,7 @@ const material = new THREE.ShaderMaterial({
     }
 });
 
-CosmicTextureBrowser.initFolder(material, {name: 'matcap'});
+CosmicTextureBrowser.initFolder(material, {type: 'matcap'});
 ```
 
 # Advanced Usage
@@ -126,7 +126,7 @@ The Cosmic Texture Browser can support other texture types, such as `normals`, `
 When using a texture type other than matcap, specify the type during initialization:
 
 ```js
-CosmicTextureBrowser.initFolder(material, {name: 'normal'});
+CosmicTextureBrowser.initFolder(material, {type: 'normal'});
 ```
 
 This tells the browser to load textures of type `normal` and apply them to the specified material.
@@ -154,8 +154,8 @@ export default {
 
 ```js
 const material = new THREE.MeshStandardMaterial();
-CosmicTextureBrowser.initFolder(material, {name: 'normal'}); // Loads normal maps
-CosmicTextureBrowser.initFolder(material, {name: 'roughness'}); // Loads roughness maps
+CosmicTextureBrowser.initFolder(material, {type: 'normal'}); // Loads normal maps
+CosmicTextureBrowser.initFolder(material, {type: 'roughness'}); // Loads roughness maps
 ```
 
 # Development

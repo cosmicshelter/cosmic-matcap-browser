@@ -57,6 +57,6 @@ function resize() {
 window.addEventListener('resize', resize);
 animate();
 
-CosmicTextureBrowser.initFolder(material, {name: 'matcap'});
+CosmicTextureBrowser.initFolder(material, {type: 'matcap'});
 // you can also specify the uniform name if it's different from the default
-// CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniform: 'uMatcapMap'});
+// CosmicTextureBrowser.initFolder(material, {type: 'matcap', uniform: 'uMatcapMap'});
