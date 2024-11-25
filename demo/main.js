@@ -59,4 +59,4 @@ animate();
 
 CosmicTextureBrowser.initFolder(material, {name: 'matcap'});
 // you can also specify the uniform name if it's different from the default
-// CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniformName: 'uMatcapMap'});
+// CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniform: 'uMatcapMap'});

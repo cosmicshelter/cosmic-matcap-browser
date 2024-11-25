@@ -46,7 +46,7 @@ const material = new THREE.ShaderMaterial({
         uMatcapMap: {value: ''}
     }
 });
-CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniformName: 'uMatcapMap'});
+CosmicTextureBrowser.initFolder(material, {name: 'matcap', uniform: 'uMatcapMap'});
 ```
 
 ### Defining uniform in `config.js`
